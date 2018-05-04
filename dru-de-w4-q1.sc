@@ -75,7 +75,22 @@ simpleIndices("(>_(va)`?(h)C(as)(x(hD)P|(fg)))", 19) == 22
 
 //======================================================================================================================
 // Task #5
-def tribonacci(triple: (Int, Int, Int), n: Int): List[Int] = Nil // todo: replace with your implementation
+def tribonacci(triple: (Int, Int, Int), n: Int): List[Int] = {
+ 
+ def tribRec(numbers: List[Int], n: Int) : Int = 
+    if (n == 0 || n == 1 || n == 2) 0
+    else  numbers(n - 1) + numbers(n - 2) + numbers(n - 3)
+         
+ var i = 3
+ var result = List(triple._1, triple._2, triple._3 )
+ 
+    while (i < n){
+     result :+=  tribRec(result, i)
+        i+=1
+    }
+    result
+       
+}
 
 tribonacci((1, 1, 1), 10) == List(1, 1, 1, 3, 5, 9, 17, 31, 57, 105)
 tribonacci((0, 0, 1), 10) == List(0, 0, 1, 1, 2, 4, 7, 13, 24, 44)
