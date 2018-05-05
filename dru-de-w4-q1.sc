@@ -180,7 +180,16 @@ ChromosomePair(List("1", "1", "1", "1", "1", "1", "1"), List("2", "2", "2", "2",
 
 //======================================================================================================================
 //Task #11
-def fatFingers(string: String): String = "" // todo: replace with your implementation
+ def fatFingers(string: String): String = {
+  var upperC = false; var result = "";
+  string.foreach((a) => {
+ if(a == 'a' || a == 'A') {
+  upperC = !upperC; a}
+ else if(upperC) result+=a.toString.toUpperCase
+      else result+=a
+ })
+ result
+}
 
 fatFingers("The quick brown fox jumps over the lazy dog.") == "The quick brown fox jumps over the lZY DOG."
 fatFingers("aAaaaaAaaaAAaAa") == ""
