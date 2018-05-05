@@ -76,20 +76,18 @@ simpleIndices("(>_(va)`?(h)C(as)(x(hD)P|(fg)))", 19) == 22
 //======================================================================================================================
 // Task #5
 def tribonacci(triple: (Int, Int, Int), n: Int): List[Int] = {
- 
- def tribRec(numbers: List[Int], n: Int) : Int = 
+
+  def tribRec(numbers: List[Int], n: Int) : Int =
     if (n == 0 || n == 1 || n == 2) 0
     else  numbers(n - 1) + numbers(n - 2) + numbers(n - 3)
-         
- var i = 3
- var result = List(triple._1, triple._2, triple._3 )
- 
-    while (i < n){
-     result :+=  tribRec(result, i)
-        i+=1
-    }
-    result
-       
+  var i = 3
+  var result = List(triple._1, triple._2, triple._3 )
+  while (i < n){
+    result :+=  tribRec(result, i)
+    i+=1
+  }
+  result
+
 }
 
 tribonacci((1, 1, 1), 10) == List(1, 1, 1, 3, 5, 9, 17, 31, 57, 105)
@@ -112,7 +110,7 @@ def reverseFun(string: String): String = {
       loop( result+currentString.reverse(0), currentString.reverse.substring(1, currentString.length))
   loop("", string)
 }
- // todo: replace with your implementation
+// todo: replace with your implementation
 
 reverseFun("012345") == "504132"
 reverseFun("jointhedarkside") == "ejdoiisnktrhaed"
@@ -137,8 +135,13 @@ foldAnArray(List(1, 2, 3, 4, 5), 2) == List(9, 6)
 
 //======================================================================================================================
 // Task #8
-def stringExpansion(string: String): String = "" // todo: replace with your implementation
-
+def stringExpansion(string: String): String = {
+  var currentNumber = 1;var result = "";
+  for (cr <- string)if(cr.isDigit) currentNumber = cr.asDigit else result+= cr.toString*currentNumber
+  result
+}
+ // string.replaceAll("[0-9]", string.slice(1, string.length));// todo: replace with your implementation
+println(stringExpansion("3abc"))
 stringExpansion("3abc") == "aaabbbccc"
 stringExpansion("3D2a5d2f") == "DDDaadddddff"
 stringExpansion("0d0a0v0t0y") == ""
@@ -148,7 +151,11 @@ stringExpansion("abcde") == "abcde"
 
 //======================================================================================================================
 // Task #9
-def lifePathNumber(date: String): Int = 0 // todo: replace with your implementation
+def lifePathNumber(date: String): Int = {
+  def loop(string:String):Int = if(string.length==1)string(0).asDigit else loop(string.map(_.asDigit).toList.sum.toString)
+  loop(date.split("-").toList.map(loop(_)).sum.toString)
+
+} // todo: replace with your implementation
 
 lifePathNumber("1879-03-14") == 6 // Albert Einstein
 lifePathNumber("1815-12-10") == 1 // Ada Lovelace
