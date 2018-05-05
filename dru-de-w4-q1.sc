@@ -151,7 +151,11 @@ stringExpansion("abcde") == "abcde"
 
 //======================================================================================================================
 // Task #9
-def lifePathNumber(date: String): Int = 0 // todo: replace with your implementation
+def lifePathNumber(date: String): Int = {
+  def loop(string:String):Int = if(string.length==1)string(0).asDigit else loop(string.map(_.asDigit).toList.sum.toString)
+  loop(date.split("-").toList.map(loop(_)).sum.toString)
+
+} // todo: replace with your implementation
 
 lifePathNumber("1879-03-14") == 6 // Albert Einstein
 lifePathNumber("1815-12-10") == 1 // Ada Lovelace
